@@ -2,6 +2,8 @@ Just Recently Our College team has developed this project.
 
 Project Video Link : https://drive.google.com/file/d/1IzsqfBGIOk86fZNRCCh51DigCU8XPHKA/view?usp=drive_link
 
+we used ML (Random Forest Algorithm),Fast API,HTML,CSS,JavaScript,SQLite3,Tesseract as an OCR technology and for validation.
+
 Screenshots:
 
 ![vlcsnap-2024-11-18-02h04m52s145](https://github.com/user-attachments/assets/ab6e3424-8b04-45b0-9cee-62c5cabbd1af)
