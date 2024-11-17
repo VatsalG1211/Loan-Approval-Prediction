@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identity Verification</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/assets/css/styles.css">
+
+    <!-- Favicons -->
+    <link href="../static/assets/img/bank.png" rel="icon">
+    <link href="../static/assets/img/bank.png" rel="icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="../static/assets/css/main.css" rel="stylesheet">
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,gu,hi,mr,ta,te,kn,bn',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <style>
+        .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s;
+}
+        /* Additional styling for Google Translate Dropdown */
+        #google_translate_element {
+            scale: 0.8;
+            background-color: white;
+            border-radius: 15px;
+        }
+        .goog-te-gadget-simple {
+            display: flex;
+            border-radius: 15px;
+            align-items: center;
+        }
+        iframe {
+            border-radius: 15px;
+        }
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-label {
+            font-weight: 600;
+            color: #333;
+        }
+        .btn-google {
+            background-color: #fff;
+            color: #757575;
+            border: 1px solid #ddd;
+        }
+        .btn-google img {
+            width: 20px;
+            margin-right: 8px;
+        }
+        .divider-text {
+            position: relative;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .divider-text::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background-color: #ddd;
+            top: 50%;
+            left: 0;
+        }
+        .divider-text span {
+            padding: 0 10px;
+            background-color: #f4f7f6;
+            position: relative;
+            z-index: 2;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body class="bg-black text-white">
+    <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center me-auto">
+                <h1 class="sitename">Loan Approval Predictor</h1>
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><div id="google_translate_element"></div></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+
+    <div class="flex items-center justify-center min-h-screen" style="background-color: rgb(55,81,126); padding-top: 20px; padding-bottom: 20px;">
+        <div class="container mx-auto flex items-center justify-center space-x-10" style="margin-top: 80px;">
+            
+            <!-- Left Side: Form and Steps -->
+            <div class="w-1/2 p-8 bg-white text-black rounded-lg shadow-lg">
+                <h2 class="text-2xl mb-5 font-semibold">Identity Verification (KYC)</h2>
+                
+                <!-- KYC Steps -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-bold mb-4">Steps to Complete Your KYC:</h3>
+                    <ol class="list-decimal pl-5 space-y-2 text-sm">
+                        <li><strong>Step 1:</strong> Enter your PAN card details.</li>
+                        <li><strong>Step 2:</strong> Upload a clear image of your PAN card.</li>
+                        <li><strong>Step 3:</strong> Confirm all information before submitting.</li>
+                        <li><strong>Step 4:</strong> Submit the form to begin the verification process.</li>
+                        <li><strong>Step 5:</strong> Wait for verification to access the loan prediction dashboard.</li>
+                    </ol>
+                </div>
+
+                <!-- KYC Form -->
+                <form id="verificationForm" class="space-y-6" action="/verify" method="post" enctype="multipart/form-data">
+                    <!-- First Name -->
+                    <div class="relative">
+                        <label for="firstName" class="text-md font-semibold">First Name</label>
+                        <input type="text" id="firstName" name="first_name" class="w-full p-2 rounded-md border-2 border-gray-300 text-black focus:border-blue-500 focus:ring-2 focus:ring-blue-500 transition duration-300" required>
+                    </div>
+                    <!-- Last Name -->
+                    <div class="relative">
+                        <label for="lastName" class="text-md font-semibold">Last Name</label>
+                        <input type="text" id="lastName" name="last_name" class="w-full p-2 rounded-md border-2 border-gray-300 text-black focus:border-blue-500 focus:ring-2 focus:ring-blue-500 transition duration-300" required>
+                    </div>
+                    <!-- Surname -->
+                    <div class="relative">
+                        <label for="surname" class="text-md font-semibold">Surname</label>
+                        <input type="text" id="surname" name="surname" class="w-full p-2 rounded-md border-2 border-gray-300 text-black focus:border-blue-500 focus:ring-2 focus:ring-blue-500 transition duration-300" required>
+                    </div>
+                    <!-- PAN Number -->
+                    <div class="relative">
+                        <label for="panNumber" class="text-md font-semibold">PAN Number</label>
+                        <input type="text" id="panNumber" name="pan_number" class="w-full p-2 rounded-md border-2 border-gray-300 text-black focus:border-blue-500 focus:ring-2 focus:ring-blue-500 transition duration-300" required>
+                    </div>
+                    <!-- Image Upload -->
+                    <div class="relative">
+                        <label for="imageUpload" class="text-md font-semibold">Upload PAN Card Image</label>
+                        <input type="file" id="imageUpload" name="image" accept="image/*" class="w-full p-2 rounded-md border-2 border-gray-300 text-black focus:border-blue-500 focus:ring-2 focus:ring-blue-500 transition duration-300" capture="environment" required>
+                        <p class="text-red-500 text-sm mt-1">* Image size should be 880 x 495.</p>
+                    </div>
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full p-2 rounded-md bg-blue-600 text-white font-bold hover:bg-blue-700 transition duration-300 transform hover:scale-105">Submit</button>
+                </form>
+                    <div id="resultModal" class="modal">
+                        <div class="modal-content">
+                            <p id="resultMessage"></p>
+                            <button id="cls" onclick="closeModal()" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Close</button>
+                            <button onclick="godash()" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded" id="dash">Go to Dashboard</button>
+                        </div>
+                    </div>
+                
+                
+            </div>
+
+            
+            <div>
+                <img src="../static/assets/img/kyc-img.png" alt="KYC Image">
+            </div>
+
+        </div>
+    </div>
+
+    
+    <script src="../static/assets/js/script.js"></script>
+
+    
+
+</body>
+</html>

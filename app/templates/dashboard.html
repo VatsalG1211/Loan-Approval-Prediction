@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Loan Approval</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+
+  <style>
+    #loanForm{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 25px 180px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+
+.hidden{
+  display: none;
+}
+
+
+
+    .gy-4{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-top{
+      padding:0px;
+    }
+
+    .frm-app{
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 0 0 10px;
+    width: 800px;
+    }
+
+
+
+div input{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input{
+  color: black;
+}
+
+.fall{
+  display: flex;
+
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(251, 1, 1);
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 40px;
+    z-index: 1000;
+    max-width: 90%;
+    width: 600px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: black;
+    font-size: 1.5rem;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+.glass {
+    background: rgba(196, 196, 196, 0.66);
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255);
+
+}
+
+.modal-popup {
+    animation: popup 0.5s forwards;
+    display: block;
+}
+
+.modal-fadeout {
+    opacity: 100%;
+}
+
+#congratsGif {
+  display: none;
+    width: 200px;
+    height: 200px;
+    margin-top: 20px;
+    margin-left: 10px;
+    scale: 0;
+}
+
+.approved {
+    color: green;
+}
+
+.rejected {
+    color: #ff0000;
+}
+
+
+    #resultModal{
+      padding: 10px 25px;
+    width: auto;
+    height: 85px;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: lightgrey;
+    border-radius: 10px;
+    z-index: 1000;
+    border: 1px solid black;
+}
+
+@keyframes popup {
+    0% {
+        transform: scale(0.5) translate(-50%, -50%);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translate(-50%, -50%);
+        opacity: 1;
+    }
+
+  
+}
+    
+  </style>
+
+  <!-- Favicons -->
+  <link href="../static/assets/img/bank.png" rel="icon">
+  <link href="../static/assets/img/bank.png" rel="icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="../static/assets/css/main.css" rel="stylesheet">
+
+  <!-- Google Translate Script -->
+  <script type="text/javascript">
+      function googleTranslateElementInit() {
+          new google.translate.TranslateElement({
+              pageLanguage: 'en',
+              includedLanguages: 'en,gu,hi,mr,ta,te,kn,bn',
+              layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+          }, 'google_translate_element');
+      }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <style>
+      /* Additional styling for Google Translate Dropdown */
+      #google_translate_element {
+          scale: 0.8;
+          background-color: white;
+          border-radius: 15px;
+      }
+      .goog-te-gadget-simple {
+          display: flex;
+          border-radius: 15px;
+          align-items: center;
+      }
+      iframe {
+          border-radius: 15px;
+      }
+      body {
+          background-color: #f4f7f6;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .card {
+          border-radius: 15px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .form-label {
+          font-weight: 600;
+          color: #333;
+      }
+      .btn-google {
+          background-color: #fff;
+          color: #757575;
+          border: 1px solid #ddd;
+      }
+      .btn-google img {
+          width: 20px;
+          margin-right: 8px;
+      }
+      .divider-text {
+          position: relative;
+          text-align: center;
+          margin-top: 20px;
+          margin-bottom: 20px;
+      }
+      .divider-text::before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 1px;
+          background-color: #ddd;
+          top: 50%;
+          left: 0;
+      }
+      .divider-text span {
+          padding: 0 10px;
+          background-color: #f4f7f6;
+          position: relative;
+          z-index: 2;
+          color: #666;
+      }
+  </style>
+
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="/" class="logo d-flex align-items-center me-auto">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="../static/assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">Loan Approval Predictor</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#form">Form</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <div id="google_translate_element"></div>
+          
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      
+      
+
+      {% if username %}
+   <span style="color: white;margin-left: 10px;font-size: 0.8rem;background-color: burlywood;padding: 5px;border-radius: 5px;">Welcome, {{ username }}!</span>   
+      <a class="btn-getstarted" href="/logout">Logout</a>
+  {% else %}
+  <a class="btn-getstarted" href="/login">Log In</a>
+  {% endif %}
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background" >
+
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
+            <!--<h1>Welcome <span>{{ username }} !</span></h1>-->
+            <h4>Welcome to our Loan Approval Prediction Dashboard! Here, you can instantly check your loan eligibility by entering a few details. Our system uses advanced analytics to evaluate your application with accuracy and transparency, helping you make informed financial decisions.</h4>
+            <p>Simply fill out the form below with your details and get an immediate prediction on your loan approval status.</p>
+
+          </div>
+          <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
+            <img src="https://cdni.iconscout.com/illustration/premium/thumb/businessman-searching-for-a-business-loan-illustration-download-in-svg-png-gif-file-formats--request-approval-taking-operations-pack-illustrations-5121469.png" class="img-fluid animated" alt="">
+          </div>
+          <nav>
+            <ul>
+                
+         
+  
+        
+        </div>
+      </div>
+
+    </section><!-- /Hero Section -->
+
+
+    
+
+    
+    <!-- About Section -->
+    <section id="form" class="about section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Loan Approval Prediction Form</h2>
+      </div><!-- End Section Title -->
+
+      <div class="frm-app p-6 max-w-4xl mx-auto">
+        <div class="fall">
+          <form id="loanForm" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" method="post" action="/predict">
+            <div>
+                <label for="age" class="block text-sm font-medium text-gray-300">Age</label>
+                <input type="number" id="age" name="age" min="19" max="100" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-700 text-black" required style="width: 190px">
+            </div>
+            <div>
+                <label for="income_annum" class="block text-sm font-medium text-gray-300">Income per Annum</label>
+                <input type="number" step="0.01" id="income_annum" name="income_annum" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-700 text-black" required>
+            </div>
+            <div>
+                <label for="work_exp" class="block text-sm font-medium text-gray-300">Work Experience</label>
+                <input type="number" id="work_exp" name="work_exp" max="55" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-700 text-black" required>
+            </div>
+            <div>
+                <label for="credit_score" class="block text-sm font-medium text-gray-300">Credit Score</label>
+                <input type="number" id="credit_score" name="credit_score" max="900" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-700 text-black" required>
+            </div>
+            <div>
+                <label for="loan_amount" class="block text-sm font-medium text-gray-300">Loan Amount</label>
+                <input type="number" step="0.01" id="loan_amount" name="loan_amount" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-700 text-black" required>
+            </div>
+            <div>
+                <label for="loan_term" class="block text-sm font-medium text-gray-300">Loan Term (months)</label>
+                <input type="number" id="loan_term" name="loan_term" max="500" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-700 text-black" required>
+            </div>
+            <div>
+                <label for="employment_status" class="block text-sm font-medium text-gray-300">Employment Status</label>
+              <br>  <select id="employment_status" name="employment_status" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-700 text-black" required>
+                    <option value="Salaried">Salaried</option>
+                    <option value="Self-employed">Self-employed</option>
+                </select>
+            </div>
+            <div>
+                <label for="marital_status" class="block text-sm font-medium text-gray-300">Marital Status</label>
+                <br>   <select id="marital_status" name="marital_status" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-700 text-black" required>
+                    <option value="Married">Married</option>
+                    <option value="Single">Single</option>
+                    <option value="Divorced">Divorced</option>
+                    <option value="Widowed">Widowed</option>
+                </select>
+            </div>
+            <div>
+                <label for="property_area" class="block text-sm font-medium text-gray-300">Property Area</label>
+                <br>  <select id="property_area" name="property_area" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-700 text-black" required>
+                    <option value="Urban">Urban</option>
+                    <option value="Rural">Rural</option>
+                    <option value="Semiurban">Semiurban</option>
+                </select>
+            </div>
+            <div>
+                <label for="residential_assets_value" class="block text-sm font-medium text-gray-300">Residential Assets Value</label>
+                <input type="number" step="0.01" id="residential_assets_value" name="residential_assets_value"  class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-700 text-black" required>
+            </div>
+            <div>
+                <label for="commercial_assets_value" class="block text-sm font-medium text-gray-300">Commercial Assets Value</label>
+                <input type="number" step="0.01" id="commercial_assets_value" name="commercial_assets_value"  class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-700 text-black" required>
+            </div>
+            <div>
+                <label for="luxury_assets_value" class="block text-sm font-medium text-gray-300">Luxury Assets Value</label>
+                <input type="number" step="0.01" id="luxury_assets_value" name="luxury_assets_value"  class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-700 text-black" required>
+            </div>
+            <div>
+                <label for="bank_asset_value" class="block text-sm font-medium text-gray-300">Bank Asset Value</label>
+                <input type="number" step="0.01" id="bank_asset_value" name="bank_asset_value" min="1" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-700 text-black" required>
+            </div>
+            <div>
+                <label for="dti" class="block text-sm font-medium text-gray-300">Debt-to-Income Ratio (DTI)</label>
+                <input type="number" step="0.01" id="dti" name="dti" max="100" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-700 text-black" required>
+            </div>
+            <div>
+                <label for="previous_loan_history" class="block text-sm font-medium text-gray-300">Previous Loan History</label>
+                <br>     <select id="previous_loan_history" name="previous_loan_history" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-700 text-black" required>
+                    <option value="Good">Good</option>
+                    <option value="Bad">Bad</option>
+                    <option value="No History">No History</option>
+                </select>
+            </div>
+            <br><br>
+            <div class="col-span-1 md:col-span-2 lg:col-span-3">
+                <button type="submit" class="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Submit</button>
+            </div>
+        </form>
+        </div>
+    </div>
+
+
+    <div id="resultModal" class="hidden" >
+      <div id="modalContent"  >
+          <img id="congratsGif" src="../static/assets/img/congrats.gif" alt="Congratulations"  />
+          <div class="git" style="font-weight: bold;left: 50px;">Loan Status: 
+            <div id="message" style="position: absolute;left: 35px;"></div></div>
+      </div>
+  </div>
+
+
+<br>
+
+    
+    <!-- Faq  Section -->
+    <section id="faq" class="faq-2 section light-background">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Frequently Asked Questions</h2>
+        <p></p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row justify-content-center">
+
+          <div class="col-lg-10">
+
+            <div class="faq-container">
+
+              <div class="faq-item faq-active" data-aos="fade-up" data-aos-delay="200">
+                <i class="faq-icon bi bi-question-circle"></i>
+                <h3>How does the Loan Approval Prediction platform work?</h3>
+                <div class="faq-content">
+                  <p>The platform uses AI and machine learning algorithms to analyze various parameters like credit score, income, employment history, and other relevant factors to predict the likelihood of loan approval. It evaluates these factors in real time and provides an instant decision based on the data.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                <i class="faq-icon bi bi-question-circle"></i>
+                <h3>What is Credit Score ?</h3>
+                <div class="faq-content">
+                  <p>CIBIL Score or Credit Score is a 3-digit numeric summary of your credit history, rating and report, and ranges from 300 to 900. The closer your score is to 900, the better your credit rating is.<a href="https://www.cibil.com/freecibilscore"> Check your CIBIL score </a></p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                <i class="faq-icon bi bi-question-circle"></i>
+                <h3>What id Debt-to-Income Ratio ?</h3>
+                <div class="faq-content">
+                  <p>Your debt-to-income ratio (DTI) is all your monthly debt payments divided by your gross monthly income. This number is one way lenders measure your ability to manage the monthly payments to repay the money you plan to borrow.<a href="https://www.clicbrics.com/debt-to-income-calculator">Calculate debt-to-income ratio</a></p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+
+              <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                <i class="faq-icon bi bi-question-circle"></i>
+                <h3>Is my data secure on the Loan Approval Prediction platform?</h3>
+                <div class="faq-content">
+                  <p>Yes, your data is fully secured. We use advanced encryption and secure authentication measures to ensure that all personal and financial information remains confidential and protected from unauthorized access.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                <i class="faq-icon bi bi-question-circle"></i>
+                <h3>Can I use the platform if I have no prior knowledge of loan processes?</h3>
+                <div class="faq-content">
+                  <p>Absolutely! The platform is designed to be user-friendly and requires no prior knowledge of loan processes. Simply enter your details, and the platform will guide you through the rest.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item" data-aos="fade-up" data-aos-delay="500">
+                <i class="faq-icon bi bi-question-circle"></i>
+                <h3>What kind of loans does the platform support for prediction?</h3>
+                <div class="faq-content">
+                  <p>The platform supports a wide range of loans, including personal loans, home loans, car loans, and business loans. Our models are customized to analyze the specific criteria relevant to each loan type.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Faq  Section -->
+
+    
+  </main>
+
+  
+  <footer id="footer" class="footer" style="padding-bottom : 0px">
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <!-- About Section -->
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="d-flex align-items-center">
+            <span class="sitename">Loan Approval Predictor</span>
+          </a>
+          <div class="footer-contact pt-3" style="text-align: left;">
+            <p>Get Loans Easily!</p>
+            <p>Developed by G-105 (LDRP)</p>
+          </div>
+        </div>
+  
+        <!-- Contact Section -->
+        <div class="col-lg-4 col-md-6 footer-contact">
+          <h4>Contact</h4>
+          <p>Email: <a href="mailto:support@loanapprovalpredict.com">support@loanapprovalpredictor.com</a></p>
+          <p>Phone: +91 123-456-789</p>
+          <p>Address: 123 Loan Street, Financial District, City, Country</p>
+        </div>
+  
+        <!-- Legal Section -->
+        <div class="col-lg-4 col-md-6 footer-legal">
+          <h4>Legal</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <!-- Footer Bottom -->
+      <div class="row footer-bottom mt-4">
+        <div class="col text-center">
+          <p>&copy; 2024 Loan Approval Predictor. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/assets/vendor/php-email-form/validate.js"></script>
+  <script src="../static/assets/vendor/aos/aos.js"></script>
+  <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../static/assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="../static/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="../static/assets/js/main.js"></script>
+  <script src="../static/assets/js/script2.js"></script>
+
+  <script>
+
+document.getElementById('loanForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = {};
+    formData.forEach((value, key) => data[key] = value);
+
+    try {
+        const response = await axios.post('http://localhost:8000/predict', data, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        // Get prediction from the response
+        const prediction = response.data.prediction;  // Adjust according to your response structure
+
+        // Get modal elements
+        const modal = document.getElementById('resultModal');
+        const messageDiv = document.getElementById('message');
+        const congratsGif = document.getElementById('congratsGif');
+
+        // Update modal content based on prediction
+        if (prediction === "Approved") {
+            messageDiv.innerHTML = `<span class="approved">Approved</span>`;
+            congratsGif.style.scale = '1';
+        } else {
+            messageDiv.innerHTML = `<span class="rejected">Rejected</span>`;
+            congratsGif.style.scale = '0';
+        }
+
+        // Show the modal
+        modal.classList.remove('hidden');
+        modal.classList.add('modal-popup');
+
+        // Fade out and hide modal
+        setTimeout(() => {
+            modal.classList.add('modal-fadeout');
+        }, 3500); // Start fadeout after 3.5 seconds
+
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('modal-popup', 'modal-fadeout');
+        }, 4000); // Hide modal after 4 seconds
+    } catch (error) {
+        console.error('Error making prediction:', error);
+    }
+});
+
+document.getElementById('resultModal').addEventListener('click', function() {
+    const modal = document.getElementById('resultModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('modal-popup', 'modal-fadeout');
+});
+
+  </script>
+
+</body>
+
+</html>
